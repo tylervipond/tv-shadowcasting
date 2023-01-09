@@ -86,9 +86,8 @@ fn scan(
             let distance = (position % map_width).abs_diff(tile_position % map_width)
                 + (position / map_width).abs_diff(tile_position / map_width);
             let tile_blocks = map[tile_position] == 1;
-            if tile_blocks
-                || distance > radius as usize
-                || is_symmetric(depth, start_slope, end_slope, column as f32)
+            if distance < radius as usize
+                && (tile_blocks || is_symmetric(depth, start_slope, end_slope, column as f32))
             {
                 fov_map[tile_position] = 1;
             }
